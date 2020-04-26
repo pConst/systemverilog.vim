@@ -20,6 +20,7 @@ syntax match svPreProc "`\(__FILE__\|__LINE__\|begin_keywords\|celldefine\|defau
 syntax match svPreCondit "`\(else\|elsif\|endif\|ifdef\|ifndef\)\>"
 syntax match svInclude "`include\>"
 syntax match svDefine "`define\>"
+syntax match svDefine "`\s*[0-9a-zA-Z_]\+"
 syntax keyword svConditional if else iff
 syntax match svLabel "\v^\W*[a-zA-Z_]+[a-zA-Z_0-9]*\s*(\[.{-}\])?\s*:"he=e-1 contained
 syntax region svCase matchgroup=svConditional start="\<casez\|casex\|case\>" end="\<endcase\>" contains=ALL
@@ -40,14 +41,15 @@ syntax match svInvSystemFunction "\$\(\K\k*\)"
 syntax match svSystemFunction "\$\(display\|finish\|stop\|exit\|realtime\|stime\|time\|printtimescale\|timeformat\|bitstoreal\|realtobits\|bitstoshortreal\|shortrealtobits\|itor\|rtoi\|signed\|unsigned\|cast\|bits\|isunbounded\|typename\|unpacked_dimensions\|dimensions\|left\|right\|low\|high\|increment\|size\|clog2\|asin\|ln\|acos\|log10\|atan\|exp\|atan2\|sqrt\|hypot\|pow\|sinh\|floor\|cosh\|ceil\|tanh\|sin\|asinh\|cos\|acosh\|tan\|atanh\|countbits\|countones\|onehot\|onehot0\|isunknown\|fatal\|error\|warning\|info\|fatal\|error\|warning\|info\|asserton\|assertoff\|assertkill\|assertcontrol\|assertpasson\|assertpassoff\|assertfailon\|assertfailoff\|assertnonvacuouson\|assertvacuousoff\|sampled\|rose\|fell\|stable\|changed\|past\|past_gclk\|rose_gclk\|fell_gclk\|stable_gclk\|changed_gclk\|future_gclk\|rising_gclk\|falling_gclk\|steady_gclk\|changing_gclk\|coverage_control\|coverage_get_max\|coverage_get\|coverage_merge\|coverage_save\|get_coverage\|set_coverage_db_name\|load_coverage_db\|random\|urandom\|urandom_range\|dist_chi_square\|dist_erlang\|dist_exponential\|dist_normal\|dist_poisson\|dist_t\|dist_uniform\|q_initialize\|q_add\|q_remove\|q_full\|q_exam\|asyncandarray\|asyncandplane\|asyncnandarray\|asyncnandplane\|asyncorarray\|asyncorplane\|asyncnorarray\|asyncnorplane\|syncandarray\|syncandplane\|syncnandarray\|syncnandplane\|syncorarray\|syncorplane\|syncnorarray\|syncnorplane\|system\|contained\|transparent\)\>"
 syntax match svObjectFunctions "\.\(num\|size\|delete\|exists\|first\|last\|next\|prev\|insert\|pop_front\|pop_back\|push_front\|push_back\|find\|find_index\|find_first\|find_first_index\|find_last\|find_last_index\|min\|max\|reverse\|sort\|rsort\|shuffle\|sum\|product\|and\|or\|xor\)\>\(\s\|\n\)*("he=e-1
 syntax match svOperator "\(\~\|&\||\|\^\|=\|!\|?\|:\|@\|<\|>\|%\|+\|-\|\*\|\/[\/\*]\@!\)"
-syntax match svDelimiter "\({\|}\|(\|)\)"
+syntax match svContacOperator "\({\|}\)"
+syntax match svDelimiter "\((\|)\)"
 
 highlight! default link svTodo Todo
 highlight! default link svLineComment Comment
 highlight! default link svBlockComment Comment
 highlight! default link svBoolean Boolean
 highlight! default link svString String
-highlight! default link svType Type
+highlight! default link svType Function
 highlight! default link svDirection StorageClass
 highlight! default link svStorageClass StorageClass
 highlight! default link svPreProc PreProc
@@ -64,9 +66,10 @@ highlight! default link svStructure Structure
 highlight! default link svTypedef Typedef
 highlight! default link svSystemFunction Function
 highlight! default link svOperator Operator
-highlight! default link svDelimiter Delimiter
+highlight! default link svContacOperator Operator
 highlight! default link svObjectFunctions Function
 
+highlight! default link svDelimiter none
 highlight! default link svCase none
 highlight! default link svInvPre none
 highlight! default link svInvSystemFunction none
